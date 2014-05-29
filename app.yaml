@@ -16,3 +16,6 @@ handlers:
 - url: /css
   static_dir: css
   expiration: 1m
+
+- url: .*
+  script: main.application
