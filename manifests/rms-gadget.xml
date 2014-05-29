@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ApplicationManifest xmlns="http://schemas.google.com/ApplicationManifest/2009">
+
+  <Support>
+    <Link rel="manage" href="http://rms-gadget.appspot.com/admin?domain${DOMAIN_NAME}" />
+
+    <Link rel="support" href="http://rms-gadget.appspot.com/support" />
+
+    <Link rel="deletion-policy" href="http://rms-gadget.appspot.com/deletion-policy" />
+  </Support>
+
+  <Name>RMS Gadget</Name>
+  <Description>An rms gadget</Description>
+
+  <Extension id="SenderEmailExtractor" type="contextExtractor">
+    <Name>Sender Email Extractor</Name>
+    <Url>google.com:SenderEmailExtractor</Url>
+    <Param name="sender_email" value=".*"/>
+    <Triggers ref="showButton" />
+    <Scope ref="emailSender"/>
+    <Container name="mail"/>
+  </Extension>
+
+  <Extension id="RawSubjectExtractor" type="contextExtractor">
+    <Name>Raw Subject Extractor</Name>
+    <Url>google.com:RawSubjectExtractor</Url>
+    <Param name="subject" value=".*"/>
+    <Triggers ref="showButton" />
+    <Scope ref="rawemailSubject"/>
+    <Container name="mail"/>
+  </Extension>
+
+  <Extension id="showButton" type="gadget">
+    Send To Quickbase Gadget
+    <Url>http://rms-gadget.appspot.com/</Url>
+    <Container name="mail"/>
+  </Extension>
+
+  <Scope id="emailSender">
+    tag:google.com,2010:auth/contextual/extractor/FROM_ADDRESS
+    <Reason>This application searches for the From field of an email.</Reason>
+  </Scope>
+  <Scope id="rawemailSubject">
+    tag:google.com,2010:auth/contextual/extractor/RAW_SUBJECT
+    <Reason>This application searches for the Subject field of an email.</Reason>
+  </Scope>
+
+</ApplicationManifest>
